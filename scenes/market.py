@@ -2,24 +2,23 @@ import time
 import config
 from adb_controller import tap, swipe
 
-def _max_and_confirm(confirm):
+def keo_max():
     swipe(*config.M_SLIDER_START, *config.M_SLIDER_END, 600)
     time.sleep(0.5)
-    tap(*confirm)
-    time.sleep(1.5)
 
-def buy_coal_full():
-    tap(*config.BUY_TAB);   time.sleep(0.8)
-    tap(*config.COAL_ITEM); time.sleep(0.8)
-    _max_and_confirm(config.BUY_CONFIRM)
+def xac_nhan():
+    tap(*config.ACTION_PILL)
+    time.sleep(1)
 
-def sell_coal_full():
-    tap(*config.SELL_TAB);  time.sleep(0.8)
-    tap(*config.COAL_ITEM); time.sleep(0.8)
-    _max_and_confirm(config.SELL_CONFIRM)
+def doi_che_do():
+    tap(*config.SWAP_BTN)
+    time.sleep(0.8)
 
 def restock_coal():
-    for _ in range(config.MARKET_CYCLES):
-        buy_coal_full()
-        sell_coal_full()
-    buy_coal_full()          # lần mua cuối để mang về Estate
+    tap(*config.BUY_COAL_BTN)      # từ Estate sang Market, đã chọn than
+    time.sleep(1.5)
+    keo_max(); xac_nhan()          # Buy full
+    doi_che_do()                   # sang Sell
+    keo_max(); xac_nhan()          # Sell full
+    doi_che_do()                   # về Buy
+    keo_max(); xac_nhan()          # Buy full lần cuối
