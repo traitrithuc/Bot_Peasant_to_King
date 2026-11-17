@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 import pytesseract
-from config import TESSERACT_PATH
+#from config import TESSERACT_PATH
 
-pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+#pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 def decode(image_bytes):
     img = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), cv2.IMREAD_COLOR)
